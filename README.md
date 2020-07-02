@@ -16,9 +16,8 @@ Requirements could be found [here](assets/requirements.pdf).
 - [x] Making plan
 - [x] Preparing the architecture
 - [x] Design entities
-- [ ] Decompose web app
-- [ ] Plan and document the API
-- [ ] Prepare pipeline
+- [x] Decompose the web app
+- [x] Plan and document the API
 - [ ] Build and test:
   - [ ] Database and queries
   - [ ] Backend service
@@ -43,7 +42,7 @@ Simple Client-Server architecture build under REST abstraction. Client make call
 
 ![database](assets/database.png)
 
-### Decompose web app
+### Decompose the web app
 
 Main page consists of the table which displays `workers_stats` view. The app will fetch the amount of workers in the system, that number will be used to determine the number of pages.
 
@@ -56,3 +55,14 @@ Worker form has items table.
 Overall, simple CRUD operations and a little bit of routing here, vuex not required.
 
 ![web-app](assets/web-app.png)
+
+### Plan and document the API
+
+As REST's main principle to abstract things out, I'll do classical HTTP to CRUD mapping:
+
+- `POST` for **C**reate
+- `GET` for **R**ead
+- `PUT` for **U**pdate
+- `Delete` for **D**elete
+
+API documentation could be found [here](api.md).
