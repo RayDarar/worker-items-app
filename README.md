@@ -2,6 +2,8 @@
 
 Web application in which you could perform accounting of workers' personal tangibles.
 
+Requirements could be found [here](assets/requirements.pdf).
+
 ## Tools ⚙️
 
 - Web app - [Vue](https://vuejs.org)
@@ -9,9 +11,11 @@ Web application in which you could perform accounting of workers' personal tangi
 - ORM - [TypeORM](https://typeorm.io/)
 - Database - [Postgres](https://www.postgresql.org/)
 
-## Plan
+## Plan 📔
 
-- [ ] Design entities
+- [x] Making plan
+- [x] Preparing the architecture
+- [x] Design entities
 - [ ] Decompose web app
 - [ ] Plan and document the API
 - [ ] Prepare pipeline
@@ -21,7 +25,7 @@ Web application in which you could perform accounting of workers' personal tangi
   - [ ] Web app
 - [ ] Final test
 
-## Development process
+## Development process 👷
 
 ### Making plan
 
@@ -30,3 +34,11 @@ First of all of course, you start from creating a plan, that one was easy enough
 ## The architecture
 
 Simple Client-Server architecture build under REST abstraction. Client make calls to the REST service which generates query to the Relational DB.
+
+## Designing entities
+
+- Workers are described by their full name
+- Workers could have 0 or more items
+- Items are described by name and price
+
+![database](assets/database.png)
