@@ -1,6 +1,7 @@
 import { Controller, Inject, Get, Param, ParseIntPipe } from "@nestjs/common";
 import { WorkersService } from "../services/workers.service";
 import { firstLetter } from "src/utils";
+import { IdValidationPipe } from "src/pipes/id-validation.pipe";
 
 @Controller("/workers")
 export class WorkersController {
@@ -15,7 +16,7 @@ export class WorkersController {
   }
 
   @Get("/page/:number")
-  public async getPage(@Param("number", ParseIntPipe) pageNumber: number) {
+  public async getPage(@Param("number", IdValidationPipe) pageNumber: number) {
     const pagesRaw = await this.service.getPage(pageNumber);
     return pagesRaw.map(stats => {
       const { firstName, lastName, middleName } = stats;
@@ -30,4 +31,9 @@ export class WorkersController {
       };
     });
   }
+
+  @Get("/:worker_id")
+  public async getWorker(
+    @Param("worker_id", IdValidationPipe) workerId: number
+  ) {}
 }
