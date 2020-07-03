@@ -6,6 +6,7 @@ import { WorkersModule } from "./workers/workers.module";
 import { configValidation, configPattern } from "./config";
 import { Worker } from "./entities/worker.entity";
 import { Item } from "./entities/item.entity";
+import { WorkerStats } from "./entities/workers-stats.entity";
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { Item } from "./entities/item.entity";
         password: configService.get<string>("db.password"),
         database: configService.get<string>("db.database"),
         synchronize: true,
-        entities: [Worker, Item]
+        entities: [Worker, Item, WorkerStats]
       }),
       inject: [ConfigService],
     }),
