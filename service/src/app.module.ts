@@ -4,6 +4,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { WorkersModule } from "./workers/workers.module";
 import { configValidation, configPattern } from "./config";
+import { Worker } from "./entities/worker.entity";
+import { Item } from "./entities/item.entity";
 
 @Module({
   imports: [
@@ -22,7 +24,7 @@ import { configValidation, configPattern } from "./config";
         password: configService.get<string>("db.password"),
         database: configService.get<string>("db.database"),
         synchronize: true,
-        autoLoadEntities: true,
+        entities: [Worker, Item]
       }),
       inject: [ConfigService],
     }),
