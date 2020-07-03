@@ -57,5 +57,7 @@ export class WorkersController {
   @Post("/")
   public async createWorker(
     @Body(WorkerCreateValidationPipe) workerInfo: CreateWorkerDto
-  ) {}
+  ) {
+    await this.service.createWorker(workerInfo);
+  }
 }
