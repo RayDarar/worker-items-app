@@ -1,5 +1,6 @@
 import { Controller, Inject, Get, Param, ParseIntPipe } from "@nestjs/common";
 import { WorkersService } from "../services/workers.service";
+import { firstLetter } from "src/utils";
 
 @Controller("/workers")
 export class WorkersController {
@@ -13,8 +14,20 @@ export class WorkersController {
     };
   }
 
-  @Get("/page/:page-number")
-  public async getPage(@Param("page-number", ParseIntPipe) pageNumber: number) {
-    return this.service.getPage(pageNumber);
+  @Get("/page/:number")
+  public async getPage(@Param("number", ParseIntPipe) pageNumber: number) {
+    const pagesRaw = await this.service.getPage(pageNumber);
+    return pagesRaw.map(stats => {
+      const { firstName, lastName, middleName } = stats;
+      const fullName = `${lastName} ${firstLetter(firstName)}.${firstLetter(
+        middleName
+      )}.`;
+
+      return {
+        fullName,
+        itemsCount: stats.itemsCount,
+        priceSum: stats.priceSum,
+      };
+    });
   }
 }

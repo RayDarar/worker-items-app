@@ -1,1 +1,5 @@
 GET http://localhost:3000/api/workers/count HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/workers/page/1 HTTP/1.1

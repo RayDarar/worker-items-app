@@ -7,7 +7,7 @@ Table of contents:
 - [API](#api)
   - [Workers module](#workers-module)
     - [GET api/workers/count](#get-apiworkerscount)
-    - [GET api/workers/page/:page-number](#get-apiworkerspagepage-number)
+    - [GET api/workers/page/:number](#get-apiworkerspagenumber)
     - [GET api/workers/:worker-id](#get-apiworkersworker-id)
     - [POST api/workers/](#post-apiworkers)
     - [PUT api/workers/:worker-id](#put-apiworkersworker-id)
@@ -38,7 +38,7 @@ Return example:
 }
 ```
 
-### GET api/workers/page/:page-number
+### GET api/workers/page/:number
 
 Return 10 workers' statistics skipping some of them
 
