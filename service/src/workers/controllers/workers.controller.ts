@@ -4,12 +4,15 @@ import {
   Get,
   Param,
   NotFoundException,
+  Post,
+  Body,
 } from "@nestjs/common";
 import { firstLetter } from "src/utils";
 import { IdValidationPipe } from "src/pipes/id-validation.pipe";
 
 import { WorkersService } from "../services/workers.service";
 import { ItemsService } from "../modules/items/services/items.service";
+import { CreateWorkerDto } from "../dto/create-worker.dto";
 
 @Controller("/workers")
 export class WorkersController {
@@ -48,5 +51,10 @@ export class WorkersController {
     if (worker) return worker;
 
     throw new NotFoundException("Worker not found");
+  }
+
+  @Post("/")
+  public async createWorker(@Body() workerInfo: CreateWorkerDto) {
+
   }
 }
