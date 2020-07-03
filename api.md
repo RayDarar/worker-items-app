@@ -13,6 +13,7 @@ Table of contents:
     - [PUT api/workers/:worker_id](#put-apiworkersworker_id)
     - [DELETE api/workers/:worker_id](#delete-apiworkersworker_id)
   - [Items module](#items-module)
+    - [POST api/workers/:worker_id/items](#post-apiworkersworker_iditems)
     - [PUT api/workers/:worker_id/items/:item_id](#put-apiworkersworker_iditemsitem_id)
     - [DELETE api/workers/:worker_id/items/:item_id](#delete-apiworkersworker_iditemsitem_id)
 
@@ -160,6 +161,26 @@ Response example:
 Sits inside workers module.
 
 Base url: `workers/<worker-id>/items/`
+
+### POST api/workers/:worker_id/items
+
+Create item for given worker
+
+Request body example:
+
+```js
+{
+  name: "Телефон Samsung",
+  price: 50000
+}
+```
+
+Response example:
+
+| Code |   Description    |
+| :--: | :--------------: |
+| 201  |     Created      |
+| 400  | Validation error |
 
 ### PUT api/workers/:worker_id/items/:item_id
 
