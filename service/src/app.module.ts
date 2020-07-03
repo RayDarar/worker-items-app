@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { WorkersModule } from "./workers/workers.module";
 import { configValidation, configPattern } from "./config";
@@ -11,6 +12,19 @@ import { configValidation, configPattern } from "./config";
       load: [configPattern],
       validationSchema: configValidation,
       envFilePath: [".env"],
+    }),
+    TypeOrmModule.forRootAsync({
+      useFactory: (configService: ConfigService) => ({
+        type: "postgres",
+        host: configService.get<string>("db.host"),
+        port: configService.get<number>("db.port"),
+        username: configService.get<string>("db.username"),
+        password: configService.get<string>("db.password"),
+        database: configService.get<string>("db.database"),
+        synchronize: true,
+        autoLoadEntities: true,
+      }),
+      inject: [ConfigService],
     }),
     WorkersModule,
   ],

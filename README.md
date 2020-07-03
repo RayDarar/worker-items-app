@@ -2,8 +2,11 @@
 
 Web application in which you could perform accounting of workers' personal tangibles.
 
-Requirements could be found [here](assets/requirements.pdf).
-API documentation could be found [here](api.md).
+Useful links:
+
+- [Requirements](assets/requirements.pdf).
+- [API documentation](api.md).
+- [Configuration list](config-list.md)
 
 ## Tools ⚙️
 
@@ -71,3 +74,7 @@ As REST's main principle to abstract things out, I'll do classical HTTP to CRUD 
 Tables, Views and relations are created automatically by TypeORM, so there's no need to do it manually. If you want, you can insert default data for testing purposes, query is [here](db/default-data.sql).
 
 > Remember to execute app first, before running query above
+
+### Backend service
+
+Started writing backend with generating nest app, adding dependencies and integrating configs.
