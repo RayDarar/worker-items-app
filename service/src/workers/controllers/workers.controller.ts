@@ -13,6 +13,7 @@ import { IdValidationPipe } from "src/pipes/id-validation.pipe";
 import { WorkersService } from "../services/workers.service";
 import { ItemsService } from "../modules/items/services/items.service";
 import { CreateWorkerDto } from "../dto/create-worker.dto";
+import { WorkerCreateValidationPipe } from "../pipes/worker-create-validation.pipe";
 
 @Controller("/workers")
 export class WorkersController {
@@ -54,7 +55,7 @@ export class WorkersController {
   }
 
   @Post("/")
-  public async createWorker(@Body() workerInfo: CreateWorkerDto) {
-
-  }
+  public async createWorker(
+    @Body(WorkerCreateValidationPipe) workerInfo: CreateWorkerDto
+  ) {}
 }
