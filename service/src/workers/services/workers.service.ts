@@ -28,4 +28,15 @@ export class WorkersService {
       .take(this.WORKERS_AT_PAGE)
       .getMany();
   }
+
+  public async getWorkerById(id: number): Promise<Worker | undefined> {
+    return this.workers.findOne(
+      {
+        id,
+      },
+      {
+        relations: ["items"],
+      }
+    );
+  }
 }

@@ -1,7 +1,15 @@
-import { Controller, Inject, Get, Param, ParseIntPipe } from "@nestjs/common";
-import { WorkersService } from "../services/workers.service";
+import {
+  Controller,
+  Inject,
+  Get,
+  Param,
+  NotFoundException,
+} from "@nestjs/common";
 import { firstLetter } from "src/utils";
 import { IdValidationPipe } from "src/pipes/id-validation.pipe";
+
+import { WorkersService } from "../services/workers.service";
+import { ItemsService } from "../modules/items/services/items.service";
 
 @Controller("/workers")
 export class WorkersController {
@@ -35,5 +43,10 @@ export class WorkersController {
   @Get("/:worker_id")
   public async getWorker(
     @Param("worker_id", IdValidationPipe) workerId: number
-  ) {}
+  ) {
+    const worker = await this.service.getWorkerById(workerId);
+    if (worker) return worker;
+
+    throw new NotFoundException("Worker not found");
+  }
 }
