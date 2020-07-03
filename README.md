@@ -3,6 +3,7 @@
 Web application in which you could perform accounting of workers' personal tangibles.
 
 Requirements could be found [here](assets/requirements.pdf).
+API documentation could be found [here](api.md).
 
 ## Tools ⚙️
 
@@ -19,7 +20,7 @@ Requirements could be found [here](assets/requirements.pdf).
 - [x] Decompose the web app
 - [x] Plan and document the API
 - [ ] Build and test:
-  - [ ] Database and queries
+  - [x] Database and queries
   - [ ] Backend service
   - [ ] Web app
 - [ ] Final test
@@ -65,4 +66,8 @@ As REST's main principle to abstract things out, I'll do classical HTTP to CRUD 
 - `PUT` for **U**pdate
 - `Delete` for **D**elete
 
-API documentation could be found [here](api.md).
+### Database and queries
+
+Tables, Views and relations are created automatically by TypeORM, so there's no need to do it manually. If you want, you can insert default data for testing purposes, query is [here](db/default-data.sql).
+
+> Remember to execute app first, before running query above
