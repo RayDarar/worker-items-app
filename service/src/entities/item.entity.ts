@@ -18,7 +18,8 @@ export class Item {
 
   @ManyToOne(
     () => Worker,
-    worker => worker.items
+    worker => worker.items,
+    { onDelete: "CASCADE" }
   )
   worker: Worker;
 }

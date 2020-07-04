@@ -26,7 +26,8 @@ export class Worker {
 
   @OneToMany(
     () => Item,
-    item => item.worker
+    item => item.worker,
+    { onDelete: "CASCADE" }
   )
   items: Item[];
 }

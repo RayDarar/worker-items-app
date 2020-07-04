@@ -79,4 +79,9 @@ export class WorkersService {
     const result = await this.workers.update({ id }, workerInfo);
     return result.affected === 1;
   }
+
+  public async deleteWorker(id: number): Promise<Boolean> {
+    const result = await this.workers.delete({ id });
+    return result.affected === 1;
+  }
 }

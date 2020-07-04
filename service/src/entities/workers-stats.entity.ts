@@ -13,6 +13,9 @@ import { ViewEntity, ViewColumn } from "typeorm";
 })
 export class WorkerStats {
   @ViewColumn()
+  id: number;
+
+  @ViewColumn()
   firstName: string;
 
   @ViewColumn()
