@@ -4,6 +4,7 @@ module.exports = {
       scss: {
         prependData: `
           @import "~@/sass/_colors.scss";
+          @import "~@/sass/_containers.scss";
         `,
       },
     },

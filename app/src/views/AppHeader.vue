@@ -1,5 +1,7 @@
 <template>
-  <header id="header"></header>
+  <header id="header">
+    <h1 class="title">Accounting App</h1>
+  </header>
 </template>
 
 <script lang="ts">
@@ -14,5 +16,11 @@ export default class AppHeader extends Vue {}
 #header {
   height: 80px;
   background-color: $accentColor;
+  @extend .centered;
+}
+
+.title {
+  color: $textColorLight;
+  font-family: $fontTitle;
 }
 </style>
