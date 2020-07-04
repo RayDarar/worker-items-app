@@ -1,6 +1,6 @@
 <template>
   <header id="header">
-    <h1 class="title">Accounting App</h1>
+    <h1 class="title">Учет Материальных Ценностей</h1>
   </header>
 </template>
 
