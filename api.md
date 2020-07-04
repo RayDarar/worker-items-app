@@ -198,7 +198,6 @@ Request body example:
 
 ```js
 {
-  id: 1,
   name: "Телефон Samsung" // this property will be updated
 }
 ```

@@ -1,11 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-
 import { Repository } from "typeorm";
 
 import { Item } from "src/entities/item.entity";
-import { CreateItemDto } from "../dto/create-item.dto";
 import { Worker } from "src/entities/worker.entity";
+
+import { CreateItemDto } from "../dto/create-item.dto";
+import { UpdateItemDto } from "../dto/update-item.dto";
 
 @Injectable()
 export class ItemsService {
@@ -33,5 +34,22 @@ export class ItemsService {
     }
 
     return false;
+  }
+
+  public async updateItem(
+    workerId: number,
+    itemId: number,
+    itemInfo: UpdateItemDto
+  ): Promise<"ok" | "WorkerNotFound" | "ItemNotFound"> {
+    const worker = await this.workers.findOne(workerId, {
+      relations: ["items"]
+    });
+    if (!worker) return "WorkerNotFound";
+
+    const item = worker.items.find(item => item.id === itemId);
+    if (!item) return "ItemNotFound";
+
+    await this.items.update({ id: itemId }, itemInfo);
+    return "ok";
   }
 }

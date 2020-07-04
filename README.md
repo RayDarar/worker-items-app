@@ -88,4 +88,6 @@ Started writing backend with generating nest app, adding dependencies and integr
 
 In the real project, I honestly would go by TDD approach and build tests first, but for small project it's okay (No it's not :D).
 
+Also to mention, there's a lot of boilerplate code that could be abstracted. For instance, writing pipes to perform joi validation (I could've written generic class that abstracts away the repeated code). But that's just about 4-5 lines savings, so in the small project like this it'll be considered as over-engineering.
+
 And now that api is implemented, let's start building the UI.
