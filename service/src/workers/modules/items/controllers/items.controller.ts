@@ -6,6 +6,7 @@ import {
   Body,
   Put,
   HttpCode,
+  Delete,
 } from "@nestjs/common";
 
 import { IdValidationPipe } from "src/pipes/id-validation.pipe";
@@ -40,6 +41,17 @@ export class ItemsController {
     @Body(UpdateItemValidationPipe) itemInfo: UpdateItemDto
   ) {
     const result = await this.service.updateItem(workerId, itemId, itemInfo);
+    if (result == "WorkerNotFound") throw new WorkerNotFoundException();
+    if (result == "ItemNotFound") throw new ItemNotFoundException();
+  }
+
+  @HttpCode(202)
+  @Delete("/:item_id")
+  public async deleteItem(
+    @Param("worker_id", IdValidationPipe) workerId: number,
+    @Param("item_id", IdValidationPipe) itemId: number
+  ) {
+    const result = await this.service.deleteItem(workerId, itemId);
     if (result == "WorkerNotFound") throw new WorkerNotFoundException();
     if (result == "ItemNotFound") throw new ItemNotFoundException();
   }

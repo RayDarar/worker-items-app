@@ -42,7 +42,7 @@ export class ItemsService {
     itemInfo: UpdateItemDto
   ): Promise<"ok" | "WorkerNotFound" | "ItemNotFound"> {
     const worker = await this.workers.findOne(workerId, {
-      relations: ["items"]
+      relations: ["items"],
     });
     if (!worker) return "WorkerNotFound";
 
@@ -50,6 +50,22 @@ export class ItemsService {
     if (!item) return "ItemNotFound";
 
     await this.items.update({ id: itemId }, itemInfo);
+    return "ok";
+  }
+
+  public async deleteItem(
+    workerId: number,
+    itemId: number
+  ): Promise<"ok" | "WorkerNotFound" | "ItemNotFound"> {
+    const worker = await this.workers.findOne(workerId, {
+      relations: ["items"],
+    });
+    if (!worker) return "WorkerNotFound";
+
+    const item = worker.items.find(item => item.id === itemId);
+    if (!item) return "ItemNotFound";
+
+    await this.items.delete({ id: itemId });
     return "ok";
   }
 }

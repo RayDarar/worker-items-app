@@ -6,7 +6,7 @@ GET http://localhost:3000/api/workers/page/1 HTTP/1.1
 
 ###
 
-GET http://localhost:3000/api/workers/4 HTTP/1.1
+GET http://localhost:3000/api/workers/1 HTTP/1.1
 
 ###
 
@@ -56,3 +56,7 @@ Content-Type: application/json
 {
   "name": "Simple Powerbank"
 }
+
+###
+
+DELETE http://localhost:3000/api/workers/1/items/7 HTTP/1.1
