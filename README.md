@@ -91,3 +91,7 @@ In the real project, I honestly would go by TDD approach and build tests first, 
 Also to mention, there's a lot of boilerplate code that could be abstracted. For instance, writing pipes to perform joi validation (I could've written generic class that abstracts away the repeated code). But that's just about 4-5 lines savings, so in the small project like this it'll be considered as over-engineering.
 
 And now that api is implemented, let's start building the UI.
+
+### Web app
+
+Using Vue CLI, I generated my app and performed basic configurations. Layout was already decomposed, so all that is left is just implementation. I started with App component, because it was the parent of all routing and by writing it's header component I will be done with sass configuration also.

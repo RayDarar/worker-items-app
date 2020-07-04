@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <app-header></app-header>
+    <app-header class="header"></app-header>
+    <router-view class="content"></router-view>
   </div>
 </template>
 
@@ -30,5 +31,10 @@ export default class App extends Vue {}
 #app {
   width: 100vw;
   height: 100vh;
+  @extend .column-container;
+}
+
+.content {
+  height: 100%;
 }
 </style>
