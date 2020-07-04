@@ -2,7 +2,11 @@
 
 Web application in which you could perform accounting of workers' personal tangibles.
 
-Requirements could be found [here](assets/requirements.pdf).
+Useful links:
+
+- [Requirements](assets/requirements.pdf).
+- [API documentation](api.md).
+- [Configuration list](config-list.md)
 
 ## Tools ⚙️
 
@@ -19,8 +23,8 @@ Requirements could be found [here](assets/requirements.pdf).
 - [x] Decompose the web app
 - [x] Plan and document the API
 - [ ] Build and test:
-  - [ ] Database and queries
-  - [ ] Backend service
+  - [x] Database and queries
+  - [x] Backend service
   - [ ] Web app
 - [ ] Final test
 
@@ -65,4 +69,25 @@ As REST's main principle to abstract things out, I'll do classical HTTP to CRUD 
 - `PUT` for **U**pdate
 - `Delete` for **D**elete
 
-API documentation could be found [here](api.md).
+### Database and queries
+
+Tables, Views and relations are created automatically by TypeORM, so there's no need to do it manually. If you want, you can insert default data for testing purposes, query is [here](db/default-data.sql).
+
+> Remember to execute app first, before running query above
+
+### Backend service
+
+Started writing backend with generating nest app, adding dependencies and integrating configs. After basic configurations, I integrated my ORM and build dependencies around it. Next processes are routine, so each api implementation could be described as an algorithm:
+
+- Describe and plan api
+- Build controller method and it's dependencies
+- If needed, build validators and set the pipes
+- Think of service methods and start implementing them
+- Refactor the controller, so that it matches the specification
+- Test it
+
+In the real project, I honestly would go by TDD approach and build tests first, but for small project it's okay (No it's not :D).
+
+Also to mention, there's a lot of boilerplate code that could be abstracted. For instance, writing pipes to perform joi validation (I could've written generic class that abstracts away the repeated code). But that's just about 4-5 lines savings, so in the small project like this it'll be considered as over-engineering.
+
+And now that api is implemented, let's start building the UI.

@@ -7,14 +7,15 @@ Table of contents:
 - [API](#api)
   - [Workers module](#workers-module)
     - [GET api/workers/count](#get-apiworkerscount)
-    - [GET api/workers/page/:page-number](#get-apiworkerspagepage-number)
-    - [GET api/workers/:worker-id](#get-apiworkersworker-id)
+    - [GET api/workers/page/:number](#get-apiworkerspagenumber)
+    - [GET api/workers/:worker_id](#get-apiworkersworker_id)
     - [POST api/workers/](#post-apiworkers)
-    - [PUT api/workers/:worker-id](#put-apiworkersworker-id)
-    - [DELETE api/workers/:worker-id](#delete-apiworkersworker-id)
+    - [PUT api/workers/:worker_id](#put-apiworkersworker_id)
+    - [DELETE api/workers/:worker_id](#delete-apiworkersworker_id)
   - [Items module](#items-module)
-    - [PUT api/workers/:worker-id/items/:item-id](#put-apiworkersworker-iditemsitem-id)
-    - [DELETE api/workers/:worker-id/items/:item-id](#delete-apiworkersworker-iditemsitem-id)
+    - [POST api/workers/:worker_id/items](#post-apiworkersworker_iditems)
+    - [PUT api/workers/:worker_id/items/:item_id](#put-apiworkersworker_iditemsitem_id)
+    - [DELETE api/workers/:worker_id/items/:item_id](#delete-apiworkersworker_iditemsitem_id)
 
 ## Workers module
 
@@ -38,7 +39,7 @@ Return example:
 }
 ```
 
-### GET api/workers/page/:page-number
+### GET api/workers/page/:number
 
 Return 10 workers' statistics skipping some of them
 
@@ -63,7 +64,7 @@ Return example:
 ];
 ```
 
-### GET api/workers/:worker-id
+### GET api/workers/:worker_id
 
 Return a worker data by given id
 
@@ -122,7 +123,15 @@ Response example:
 | 201  |     Created      |
 | 400  | Validation error |
 
-### PUT api/workers/:worker-id
+**201**:
+
+```js
+{
+  id: 12, // created id
+}
+```
+
+### PUT api/workers/:worker_id
 
 Update worker's properties
 
@@ -130,8 +139,7 @@ Request body example:
 
 ```js
 {
-  id: 1, // required
-  firstName: "Ансар" // will update this property
+  firstName: "Ансар"; // will update this property
 }
 ```
 
@@ -143,7 +151,7 @@ Response example:
 | 400  | Validation error |
 | 404  |  User not found  |
 
-### DELETE api/workers/:worker-id
+### DELETE api/workers/:worker_id
 
 Delete worker by given id
 
@@ -161,7 +169,28 @@ Sits inside workers module.
 
 Base url: `workers/<worker-id>/items/`
 
-### PUT api/workers/:worker-id/items/:item-id
+### POST api/workers/:worker_id/items
+
+Create item for given worker
+
+Request body example:
+
+```js
+{
+  name: "Телефон Samsung",
+  price: 50000
+}
+```
+
+Response example:
+
+| Code |      Description       |
+| :--: | :--------------------: |
+| 201  |        Created         |
+| 400  |    Validation error    |
+| 404  | User or item not found |
+
+### PUT api/workers/:worker_id/items/:item_id
 
 Update specific item for given worker
 
@@ -169,7 +198,6 @@ Request body example:
 
 ```js
 {
-  id: 1,
   name: "Телефон Samsung" // this property will be updated
 }
 ```
@@ -182,7 +210,7 @@ Response example:
 | 400  |    Validation error    |
 | 404  | User or item not found |
 
-### DELETE api/workers/:worker-id/items/:item-id
+### DELETE api/workers/:worker_id/items/:item_id
 
 Delete specific item for given worker
 

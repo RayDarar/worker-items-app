@@ -1,0 +1,62 @@
+GET http://localhost:3000/api/workers/count HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/workers/page/1 HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/workers/1 HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/workers/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstName": "Тест",
+  "lastName": "Тестовой",
+  "middleName": "Тестович",
+  "items": [
+    {
+      "name": "Тестовый смартфон",
+      "price": 120000
+    }
+  ]
+}
+
+###
+
+PUT http://localhost:3000/api/workers/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstName": "Ансар"
+}
+
+###
+
+DELETE http://localhost:3000/api/workers/4 HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/workers/1/items/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Powerbank",
+  "price": 12000
+}
+
+###
+
+PUT http://localhost:3000/api/workers/1/items/7 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Simple Powerbank"
+}
+
+###
+
+DELETE http://localhost:3000/api/workers/1/items/7 HTTP/1.1
