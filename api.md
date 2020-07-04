@@ -139,7 +139,7 @@ Request body example:
 
 ```js
 {
-  firstName: "Ансар" // will update this property
+  firstName: "Ансар"; // will update this property
 }
 ```
 
@@ -184,10 +184,11 @@ Request body example:
 
 Response example:
 
-| Code |   Description    |
-| :--: | :--------------: |
-| 201  |     Created      |
-| 400  | Validation error |
+| Code |      Description       |
+| :--: | :--------------------: |
+| 201  |        Created         |
+| 400  |    Validation error    |
+| 404  | User or item not found |
 
 ### PUT api/workers/:worker_id/items/:item_id
 

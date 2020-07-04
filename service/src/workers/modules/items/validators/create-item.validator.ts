@@ -2,7 +2,7 @@ import joi from "@hapi/joi";
 
 import { nameValidator } from "src/validators/name.validator";
 
-export const itemCreateValidator = joi.object({
+export const createItemValidator = joi.object({
   name: nameValidator,
   price: joi
     .number()

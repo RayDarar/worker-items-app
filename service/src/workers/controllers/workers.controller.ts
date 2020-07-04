@@ -3,7 +3,6 @@ import {
   Inject,
   Get,
   Param,
-  NotFoundException,
   Post,
   Body,
   Put,

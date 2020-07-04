@@ -24,7 +24,7 @@ Useful links:
 - [x] Plan and document the API
 - [ ] Build and test:
   - [x] Database and queries
-  - [ ] Backend service
+  - [x] Backend service
   - [ ] Web app
 - [ ] Final test
 
@@ -77,4 +77,15 @@ Tables, Views and relations are created automatically by TypeORM, so there's no 
 
 ### Backend service
 
-Started writing backend with generating nest app, adding dependencies and integrating configs.
+Started writing backend with generating nest app, adding dependencies and integrating configs. After basic configurations, I integrated my ORM and build dependencies around it. Next processes are routine, so each api implementation could be described as an algorithm:
+
+- Describe and plan api
+- Build controller method and it's dependencies
+- If needed, build validators and set the pipes
+- Think of service methods and start implementing them
+- Refactor the controller, so that it matches the specification
+- Test it
+
+In the real project, I honestly would go by TDD approach and build tests first, but for small project it's okay (No it's not :D).
+
+And now that api is implemented, let's start building the UI.

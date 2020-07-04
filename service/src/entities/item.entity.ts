@@ -12,7 +12,7 @@ export class Item {
   name: string;
 
   @Column({
-    type: "decimal",
+    type: "integer",
   })
   price: number;
 
