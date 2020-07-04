@@ -4,7 +4,7 @@ import { nameValidator } from "src/validators/name.validator";
 
 import { itemCreateValidator } from "../modules/items/validators/item-create.validator";
 
-export const workerCreateValidator = joi.object({
+export const createWorkerValidator = joi.object({
   firstName: nameValidator,
   lastName: nameValidator,
   middleName: nameValidator.optional(),

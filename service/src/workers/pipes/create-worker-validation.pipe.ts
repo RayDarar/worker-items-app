@@ -1,12 +1,12 @@
 import { PipeTransform, Injectable, BadRequestException } from "@nestjs/common";
 import { CreateWorkerDto } from "../dto/create-worker.dto";
-import { workerCreateValidator } from "../validators/worker-create.validator";
+import { createWorkerValidator } from "../validators/create-worker.validator";
 
 // Jesus, there is a better name for that, but I'm in hurry
 @Injectable()
-export class WorkerCreateValidationPipe implements PipeTransform {
+export class CreateWorkerValidationPipe implements PipeTransform {
   transform(workerInfo: CreateWorkerDto) {
-    const { error } = workerCreateValidator.validate(workerInfo);
+    const { error } = createWorkerValidator.validate(workerInfo);
     if (error) {
       throw new BadRequestException(error);
     }
