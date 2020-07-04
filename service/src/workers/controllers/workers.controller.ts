@@ -35,14 +35,16 @@ export class WorkersController {
     const pagesRaw = await this.service.getPage(pageNumber);
     return pagesRaw.map(stats => {
       const { firstName, lastName, middleName } = stats;
-      const fullName = `${lastName} ${firstLetter(firstName)}.${firstLetter(
-        middleName
-      )}.`;
+      let fullName = `${lastName} ${firstLetter(firstName)}.`;
+
+      if (middleName) {
+        fullName += `${firstLetter(middleName)}.`;
+      }
 
       return {
         fullName,
-        itemsCount: stats.itemsCount,
-        priceSum: stats.priceSum,
+        itemsCount: parseInt(stats.itemsCount + ""),
+        priceSum: parseInt(stats.priceSum + ""),
       };
     });
   }
@@ -61,13 +63,18 @@ export class WorkersController {
   public async createWorker(
     @Body(CreateWorkerValidationPipe) workerInfo: CreateWorkerDto
   ) {
-    await this.service.createWorker(workerInfo);
+    const id = await this.service.createWorker(workerInfo);
+    return {
+      id,
+    };
   }
 
   @Put("/:worker_id")
   public async updateWorker(
+    @Param("worker_id", IdValidationPipe) workerId: number,
     @Body(UpdateWorkerValidationPipe) workerInfo: UpdateWorkerDto
   ) {
-    
+    const result = await this.service.updateWorker(workerId, workerInfo);
+    if (!result) throw new NotFoundException("Worker not Found");
   }
 }

@@ -123,6 +123,14 @@ Response example:
 | 201  |     Created      |
 | 400  | Validation error |
 
+**201**:
+
+```js
+{
+  id: 12, // created id
+}
+```
+
 ### PUT api/workers/:worker_id
 
 Update worker's properties
@@ -131,7 +139,6 @@ Request body example:
 
 ```js
 {
-  id: 1, // required
   firstName: "Ансар" // will update this property
 }
 ```

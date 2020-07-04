@@ -8,6 +8,7 @@ import { Item } from "src/entities/item.entity";
 
 import { CreateWorkerDto } from "../dto/create-worker.dto";
 import { ItemsService } from "../modules/items/services/items.service";
+import { UpdateWorkerDto } from "../dto/update-worker.dto";
 
 @Injectable()
 export class WorkersService {
@@ -51,7 +52,7 @@ export class WorkersService {
     lastName,
     middleName,
     items,
-  }: CreateWorkerDto): Promise<void> {
+  }: CreateWorkerDto): Promise<number> {
     const worker = this.workers.create({
       firstName,
       lastName,
@@ -67,6 +68,15 @@ export class WorkersService {
     const savedItems = await Promise.all(tasks);
 
     worker.items = savedItems;
-    await this.workers.save(worker);
+    const savedWorker = await this.workers.save(worker);
+    return savedWorker.id;
+  }
+
+  public async updateWorker(
+    id: number,
+    workerInfo: UpdateWorkerDto
+  ): Promise<Boolean> {
+    const result = await this.workers.update({ id }, workerInfo);
+    return result.affected === 1;
   }
 }
