@@ -33,8 +33,4 @@ export default class App extends Vue {}
   height: 100vh;
   @extend .column-container;
 }
-
-.content {
-  height: 100%;
-}
 </style>
