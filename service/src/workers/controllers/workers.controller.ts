@@ -15,6 +15,8 @@ import { WorkersService } from "../services/workers.service";
 import { ItemsService } from "../modules/items/services/items.service";
 import { CreateWorkerDto } from "../dto/create-worker.dto";
 import { CreateWorkerValidationPipe } from "../pipes/create-worker-validation.pipe";
+import { UpdateWorkerDto } from "../dto/update-worker.dto";
+import { UpdateWorkerValidationPipe } from "../pipes/update-worker-validation.pipe";
 
 @Controller("/workers")
 export class WorkersController {
@@ -64,8 +66,8 @@ export class WorkersController {
 
   @Put("/:worker_id")
   public async updateWorker(
-    @Body() workerInfo
+    @Body(UpdateWorkerValidationPipe) workerInfo: UpdateWorkerDto
   ) {
-
+    
   }
 }
