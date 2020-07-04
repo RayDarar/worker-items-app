@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header class="header"></header>
+    <app-header></app-header>
   </div>
 </template>
 
@@ -8,7 +8,13 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 
-@Component({})
+import AppHeader from "./views/AppHeader.vue";
+
+@Component({
+  components: {
+    AppHeader,
+  },
+})
 export default class App extends Vue {}
 </script>
 
