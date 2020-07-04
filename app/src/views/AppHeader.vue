@@ -17,6 +17,7 @@ export default class AppHeader extends Vue {}
   height: 80px;
   background-color: $accentColor;
   @extend .centered;
+  @include material-shadow($accentColor);
 }
 
 .title {
