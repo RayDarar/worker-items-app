@@ -8,12 +8,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
-
-enum ButtonSize {
-  SMALL = "small",
-  MEDIUM = "medium",
-  BIG = "big",
-}
+import { ButtonSize } from "@/types";
 
 @Component({})
 export default class BaseButton extends Vue {
