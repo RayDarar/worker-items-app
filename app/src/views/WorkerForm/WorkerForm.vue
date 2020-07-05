@@ -140,7 +140,13 @@ export default class WorkerForm extends Vue {
         setTimeout(() => this.$router.push("/"), ALERT_TIME);
       } else this.triggerMessage("Ошибка", true);
     } else {
-      // d
+      delete this.worker.items;
+      const result = await workersApi.updateWorker(this.worker);
+
+      if (result.status == 202) {
+        this.triggerMessage("Успешно");
+        setTimeout(() => this.$router.push("/"), ALERT_TIME);
+      } else this.triggerMessage("Ошибка", true);
     }
   }
 
