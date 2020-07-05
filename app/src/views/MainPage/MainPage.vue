@@ -1,7 +1,11 @@
 <template>
   <div id="main-page">
     <div class="wrapper">
-      <base-table :headers="headers" :items="items"></base-table>
+      <base-table
+        :headers="headers"
+        :items="items"
+        :context-items="contextItems"
+      ></base-table>
     </div>
   </div>
 </template>
@@ -9,9 +13,9 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { TableHeader } from "@/types";
+import { TableHeader, ContextItem, TableRowItem } from "@/types";
 
-const workers = [
+const workers: TableRowItem[] = [
   {
     id: 1,
     fullName: "Steven Underwood",
@@ -48,6 +52,12 @@ const headersRaw: TableHeader[] = [
     key: "priceSum",
   },
 ];
+const contextItems: ContextItem[] = [
+  {
+    event: "delete-row",
+    label: "Удалить",
+  },
+];
 
 @Component({})
 export default class MainPage extends Vue {
@@ -57,6 +67,9 @@ export default class MainPage extends Vue {
 
   get headers() {
     return headersRaw;
+  }
+  get contextItems() {
+    return contextItems;
   }
 }
 </script>

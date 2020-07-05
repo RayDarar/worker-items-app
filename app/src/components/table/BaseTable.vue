@@ -12,7 +12,22 @@
         :selection-id="selectedId"
         @click.native="updateSelection(item.id)"
         @dblclick.native="emitDoubleClick(item.id)"
+        @contextmenu.native.prevent="openContextMenu($event, item.id)"
       ></base-table-row>
+      <ul
+        v-show="context.visible"
+        class="context-menu"
+        :style="{ left: context.x, top: context.y }"
+      >
+        <li
+          @click="emitContextEvent(item.event)"
+          class="context-menu__item"
+          v-for="item in contextItems"
+          :key="item.event"
+        >
+          {{ item.label }}
+        </li>
+      </ul>
     </tbody>
   </table>
 </template>
@@ -24,7 +39,7 @@ import { Prop } from "vue-property-decorator";
 
 import BaseTableHeaders from "./BaseTableHeaders.vue";
 import BaseTableRow from "./BaseTableRow.vue";
-import { TableHeader, TableRow } from "@/types";
+import { TableHeader, TableRow, ContextItem } from "@/types";
 
 @Component({
   components: {
@@ -41,6 +56,9 @@ export default class BaseTable extends Vue {
     validator: (items) => items.every((item: TableRow) => item.id),
   })
   items: TableRow[];
+
+  @Prop()
+  contextItems: ContextItem[];
 
   selectedId = -1;
   public updateSelection(id: number) {
@@ -73,11 +91,64 @@ export default class BaseTable extends Vue {
   public emitDoubleClick(id: number) {
     this.$emit("double-click", id);
   }
+
+  context = {
+    visible: false,
+    x: "0px",
+    y: "0px",
+    id: -1,
+  };
+  public openContextMenu(e: MouseEvent, id: number) {
+    this.context.visible = true;
+    this.context.x = e.x + "px";
+    this.context.y = e.y + "px";
+    this.context.id = id;
+  }
+  public closeContextMenu() {
+    this.context.visible = false;
+  }
+  public emitContextEvent(event: string) {
+    this.$emit(event, this.context.id);
+  }
+
+  created() {
+    document.addEventListener("click", this.closeContextMenu);
+  }
+
+  beforeDestroy() {
+    document.removeEventListener("click", this.closeContextMenu);
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+@import "~vue-context/src/sass/vue-context";
+
 #table {
   width: 100%;
+  position: relative;
+}
+.context-menu {
+  $radius: 5px;
+
+  @extend .column-container;
+  @include material-shadow(black);
+  background-color: white;
+  list-style: none;
+  border-radius: $radius;
+
+  position: fixed;
+  transition: all 0.3s;
+
+  &__item {
+    padding: 1em;
+    cursor: pointer;
+    border-radius: $radius;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $accentGrayLight;
+    }
+  }
 }
 </style>
