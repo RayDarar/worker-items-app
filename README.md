@@ -111,3 +111,21 @@ For api calls I installed axios and abstracted such calls away. Ideally, there w
 ### Final test
 
 I started preparations by writing instructions of how to launch the app.
+
+## In action
+
+Sorting:
+
+![main-sort](assets/main-sort.gif)
+
+Editing:
+
+![main-edit](assets/main-edit.gif)
+
+Adding:
+
+![main-add](assets/main-add.gif)
+
+Deleting:
+
+![main-delete](assets/main-delete.gif)
