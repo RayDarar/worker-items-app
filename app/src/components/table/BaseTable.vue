@@ -1,6 +1,8 @@
 <template>
   <table id="table">
-    <thead></thead>
+    <thead>
+      <base-table-headers :headers="headers"></base-table-headers>
+    </thead>
     <tbody></tbody>
   </table>
 </template>
@@ -10,10 +12,19 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
 
-@Component({})
+import BaseTableHeaders from "./BaseTableHeaders.vue";
+import BaseTableRow from "./BaseTableRow.vue";
+import { TableHeader } from "@/types";
+
+@Component({
+  components: {
+    BaseTableHeaders,
+    BaseTableRow,
+  },
+})
 export default class BaseTable extends Vue {
   @Prop({ required: true })
-  headers: object[];
+  headers: TableHeader[];
 }
 </script>
 
