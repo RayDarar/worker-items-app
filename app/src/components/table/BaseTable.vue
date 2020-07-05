@@ -35,7 +35,10 @@ export default class BaseTable extends Vue {
   @Prop({ required: true })
   headers: TableHeader[];
 
-  @Prop({ required: true })
+  @Prop({
+    required: true,
+    validator: (items) => items.every((item: TableRow) => item.id),
+  })
   items: TableRow[];
 
   selectedId = -1;
