@@ -16,6 +16,24 @@ export interface ContextItem {
   label: string;
 }
 
+export interface Worker {
+  id: number;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  items: WorkerItem[];
+  status: Status;
+}
+
+export interface WorkerItem {
+  id: number;
+  name: string;
+  price: number;
+  status: Status;
+}
+
+export type Status = "new" | "delete" | "update";
+
 export enum ButtonSize {
   SMALL = "small",
   MEDIUM = "medium",
