@@ -6,6 +6,7 @@ export interface TableHeader {
 
 export interface TableRowItem {
   id: number;
+  [index: string]: any;
 }
 export type TableRow = object & TableRowItem;
 

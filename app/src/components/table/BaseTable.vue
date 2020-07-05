@@ -1,7 +1,7 @@
 <template>
   <table id="table">
     <thead>
-      <base-table-headers :headers="headers"></base-table-headers>
+      <base-table-headers :headers="headers" @sort="setSortingKey"></base-table-headers>
     </thead>
     <tbody>
       <base-table-row
@@ -46,7 +46,26 @@ export default class BaseTable extends Vue {
     this.selectedId = id;
   }
 
+  sortKey = {
+    key: "",
+    reverse: false,
+  };
+  public setSortingKey(key: string) {
+    this.sortKey.reverse = this.sortKey.key == key && !this.sortKey.reverse;
+    this.sortKey.key = key;
+  }
+
   get parsedItems() {
+    const item = this.items[0];
+    const key = this.sortKey.key;
+    if (item && key in item) {
+      return this.items.sort((a, b) => {
+        const order = this.sortKey.reverse ? 1 : -1;
+        if (a[key] < b[key]) return order;
+        else if (a[key] > b[key]) return order * -1;
+        return 0;
+      });
+    }
     return this.items;
   }
 }
