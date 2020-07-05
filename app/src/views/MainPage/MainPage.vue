@@ -14,7 +14,7 @@
         <main-page-nav
           class="nav"
           @page-change="updatePage"
-          :pages="pagesCount"
+          :count="workersCount"
         ></main-page-nav>
       </div>
     </div>
@@ -42,13 +42,15 @@ const ALERT_TIME = 1000;
 })
 export default class MainPage extends Vue {
   workersCount = 0;
-  get pagesCount() {
-    const pages = Math.ceil(this.workersCount / 10);
-    return pages < 1 ? 1 : pages;
-  }
+  currentPage = 1;
   async updatePage(page: number) {
+    this.currentPage = page;
     const response = await workersApi.getPage(page);
     this.workers = response.data;
+  }
+  async updateWorkersCount() {
+    const response = await workersApi.getCount();
+    this.workersCount = response.data.result;
   }
   addWorker() {
     this.$router.push("/form/new");
@@ -86,10 +88,8 @@ export default class MainPage extends Vue {
   ];
 
   async created() {
-    const response = await workersApi.getCount();
-    this.workersCount = response.data.result;
-
-    await this.updatePage(1);
+    await this.updateWorkersCount();
+    await this.updatePage(this.currentPage);
   }
 
   async deleteWorker(id: number) {
@@ -97,7 +97,7 @@ export default class MainPage extends Vue {
     if (answer) {
       const response = await workersApi.deleteWorker(id);
       if (response.status == 202) {
-        this.workers = this.workers.filter((worker) => worker.id != id);
+        this.updatePage(this.currentPage);
         this.triggerMessage("Успешно");
       } else this.triggerMessage("Ошибка", true);
     }

@@ -1,4 +1,5 @@
 module.exports = {
+  outputDir: "../service/public",
   css: {
     loaderOptions: {
       scss: {

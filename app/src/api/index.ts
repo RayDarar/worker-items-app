@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { Worker, WorkerItem } from "@/types";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "/api",
 });
 
 function Catch() {

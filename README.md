@@ -7,6 +7,7 @@ Useful links:
 - [Requirements](assets/requirements.pdf).
 - [API documentation](api.md).
 - [Configuration list](config-list.md)
+- [How to install](install.md)
 
 ## Tools ⚙️
 
@@ -22,11 +23,11 @@ Useful links:
 - [x] Design entities
 - [x] Decompose the web app
 - [x] Plan and document the API
-- [ ] Build and test:
+- [x] Build and test:
   - [x] Database and queries
   - [x] Backend service
-  - [ ] Web app
-- [ ] Final test
+  - [x] Web app
+- [x] Final test
 
 ## Development process 👷
 
@@ -95,3 +96,36 @@ And now that api is implemented, let's start building the UI.
 ### Web app
 
 Using Vue CLI, I generated my app and performed basic configurations. Layout was already decomposed, so all that is left is just implementation. I started with App component, because it was the parent of all routing and by writing it's header component I will be done with sass configuration also.
+
+So, I'm creating a number of generic components:
+
+- `BaseButton` - generic looking button
+- `AlertBox` - Box for generating user feedback on action
+- `ConfirmBox` - Custom, promise-based Prompt Dialog
+- `BaseTable` - A multi-task generic table
+
+After implementing these, creating ui was much simpler.
+
+For api calls I installed axios and abstracted such calls away. Ideally, there would be a service layer (or vuex), but I was running out of time.
+
+### Final test
+
+I started preparations by writing instructions of how to launch the app.
+
+## In action
+
+Sorting:
+
+![main-sort](assets/main-sort.gif)
+
+Editing:
+
+![main-edit](assets/main-edit.gif)
+
+Adding:
+
+![main-add](assets/main-add.gif)
+
+Deleting:
+
+![main-delete](assets/main-delete.gif)
