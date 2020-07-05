@@ -9,6 +9,8 @@
         :key="item.id"
         :item="item"
         :headers="headers"
+        :selection-id="selectedId"
+        @click.native="updateSelection(item.id)"
       ></base-table-row>
     </tbody>
   </table>
@@ -35,6 +37,11 @@ export default class BaseTable extends Vue {
 
   @Prop({ required: true })
   items: TableRow[];
+
+  selectedId = -1;
+  public updateSelection(id: number) {
+    this.selectedId = id;
+  }
 
   get parsedItems() {
     return this.items;

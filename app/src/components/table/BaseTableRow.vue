@@ -1,5 +1,10 @@
 <template>
-  <tr id="table-row">
+  <tr
+    id="table-row"
+    :class="{
+      'table-row_clicked': isSelected,
+    }"
+  >
     <td class="table-data" v-for="header in headers" :key="header.key">
       {{ item[header.key] }}
     </td>
@@ -20,6 +25,13 @@ export default class BaseTableRow extends Vue {
 
   @Prop({ required: true })
   headers: TableHeader[];
+
+  @Prop({ default: -1 })
+  selectionId: number;
+
+  get isSelected() {
+    return this.item.id === this.selectionId;
+  }
 }
 </script>
 
@@ -29,6 +41,11 @@ export default class BaseTableRow extends Vue {
   &:hover {
     background-color: $accentGrayLight;
   }
+  cursor: pointer;
+}
+
+.table-row_clicked {
+  background-color: $accentGrayDark;
 }
 
 .table-data {

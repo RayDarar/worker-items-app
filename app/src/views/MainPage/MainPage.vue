@@ -1,7 +1,7 @@
 <template>
   <div id="main-page">
     <div class="wrapper">
-      <base-table :headers="headers"></base-table>
+      <base-table :headers="headers" :items="items"></base-table>
     </div>
   </div>
 </template>
@@ -9,6 +9,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import { TableHeader } from "@/types";
 
 const workers = [
   {
@@ -30,27 +31,28 @@ const workers = [
     priceSum: 40339,
   },
 ];
-const headersRaw = [
+const headersRaw: TableHeader[] = [
   {
-    name: "ФИО",
+    label: "ФИО",
     width: "30%",
+    key: "fullName",
   },
   {
-    name: "Кол-во",
+    label: "Кол-во",
     width: "15%",
+    key: "itemsCount",
   },
   {
-    name: "Общая стоимость",
+    label: "Общая стоимость",
     width: "35%",
+    key: "priceSum",
   },
 ];
 
 @Component({})
 export default class MainPage extends Vue {
-  workers: object[];
-
-  created() {
-    this.workers = workers;
+  get items() {
+    return workers;
   }
 
   get headers() {
