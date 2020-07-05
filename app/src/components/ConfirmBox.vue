@@ -1,12 +1,14 @@
 <template>
   <transition name="fade">
     <div id="confirm-box" v-show="isVisible">
-      <p class="text">
-        {{ text }}
-      </p>
       <div class="wrapper">
-        <base-button @click="answer(true)">Да</base-button>
-        <base-button @click="answer(false)">Нет</base-button>
+        <p class="text">
+          {{ text }}
+        </p>
+        <div class="button-wrapper">
+          <base-button class="button" @click="answer(true)">Да</base-button>
+          <base-button class="button" @click="answer(false)">Нет</base-button>
+        </div>
       </div>
     </div>
   </transition>
@@ -44,8 +46,43 @@ export default class ConfirmBox extends Vue {
     size: 1.2rem;
     family: $fontText;
   }
+
+  &::before {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    background-color: rgba($color: #000000, $alpha: 0.3);
+  }
+}
+
+.wrapper {
   border-radius: 5px;
-  color: white;
+  background-color: white;
+
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1em;
+
+  * {
+    margin: 0.5em;
+  }
+}
+
+.text {
+  text-align: center;
+}
+
+.button-wrapper {
+  margin-top: 1em;
+  @extend .row-container;
+
+  justify-content: space-evenly;
 }
 
 .fade-enter-active,
