@@ -3,7 +3,14 @@
     <thead>
       <base-table-headers :headers="headers"></base-table-headers>
     </thead>
-    <tbody></tbody>
+    <tbody>
+      <base-table-row
+        v-for="item in parsedItems"
+        :key="item.id"
+        :item="item"
+        :headers="headers"
+      ></base-table-row>
+    </tbody>
   </table>
 </template>
 
@@ -14,7 +21,7 @@ import { Prop } from "vue-property-decorator";
 
 import BaseTableHeaders from "./BaseTableHeaders.vue";
 import BaseTableRow from "./BaseTableRow.vue";
-import { TableHeader } from "@/types";
+import { TableHeader, TableRow } from "@/types";
 
 @Component({
   components: {
@@ -25,6 +32,13 @@ import { TableHeader } from "@/types";
 export default class BaseTable extends Vue {
   @Prop({ required: true })
   headers: TableHeader[];
+
+  @Prop({ required: true })
+  items: TableRow[];
+
+  get parsedItems() {
+    return this.items;
+  }
 }
 </script>
 

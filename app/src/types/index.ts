@@ -4,6 +4,11 @@ export interface TableHeader {
   key: string;
 }
 
+export interface TableRowItem {
+  id: number;
+}
+export type TableRow = object & TableRowItem;
+
 export enum ButtonSize {
   SMALL = "small",
   MEDIUM = "medium",

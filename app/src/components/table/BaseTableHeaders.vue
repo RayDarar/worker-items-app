@@ -42,12 +42,13 @@ export default class BaseTableHeaders extends Vue {
 
   .wrapper {
     @extend .row-container;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     .label {
       font: {
         size: 1.2rem;
+        family: $fontTitle;
       }
     }
     .icon {
