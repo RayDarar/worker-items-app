@@ -43,6 +43,10 @@ export default class AlertBox extends Vue {
   }
   border-radius: 5px;
   color: white;
+
+  position: fixed;
+  left: 5%;
+  top: calc(3% + 80px);
 }
 
 .error {

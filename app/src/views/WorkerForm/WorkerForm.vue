@@ -40,7 +40,7 @@
       <base-button class="button" @click="cancel">Отмена</base-button>
       <base-button class="button" @click="markAddition">Добавить ценность</base-button>
     </div>
-    <alert-box class="alert-box" ref="box"></alert-box>
+    <alert-box ref="box"></alert-box>
     <confirm-box ref="confirm"></confirm-box>
   </div>
 </template>
@@ -51,7 +51,7 @@ import Component from "vue-class-component";
 
 import { workersApi } from "@/api";
 import { TableHeader, ContextItem, Worker, WorkerItem } from "@/types";
-import AlertBox from "../../components/AlertBox.vue";
+import AlertBox from "@/components/AlertBox.vue";
 import ConfirmBox from "@/components/ConfirmBox.vue";
 
 const ALERT_TIME = 1000;
@@ -129,6 +129,9 @@ export default class WorkerForm extends Vue {
   }
 
   async save() {
+    const answer = await this.question("Вы уверены?");
+    if (!answer) return;
+
     delete this.worker.status;
     if (this.isNew) {
       delete this.worker.id;
@@ -209,10 +212,5 @@ export default class WorkerForm extends Vue {
   .button {
     margin: 1em;
   }
-}
-.alert-box {
-  position: fixed;
-  left: 5%;
-  top: calc(3% + 80px);
 }
 </style>

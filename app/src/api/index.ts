@@ -48,6 +48,11 @@ class WorkerApi {
     delete workerInfo.id;
     return api.put("/workers/" + id, workerInfo);
   }
+
+  @Catch()
+  async deleteWorker(id: number) {
+    return api.delete("/workers/" + id);
+  }
 }
 
 export const workersApi = new WorkerApi();
