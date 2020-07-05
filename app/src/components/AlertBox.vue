@@ -1,14 +1,16 @@
 <template>
-  <div
-    id="alert-box"
-    :class="{
-      success: !isError,
-      error: isError,
-    }"
-    v-show="isVisible"
-  >
-    {{ text }}
-  </div>
+  <transition name="fade">
+    <div
+      id="alert-box"
+      :class="{
+        success: isError,
+        error: !isError,
+      }"
+      v-show="isVisible"
+    >
+      {{ text }}
+    </div>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -40,13 +42,23 @@ export default class AlertBox extends Vue {
     family: $fontText;
   }
   border-radius: 5px;
+  color: white;
 }
 
 .error {
-  background-color: darkgreen;
+  background-color: green;
 }
 
 .success {
   background-color: darkred;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
