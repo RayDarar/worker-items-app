@@ -21,3 +21,15 @@ DB_PASSWORD # Postgres role password, required
 
 DB_DATABASE # Postgres target database
 ```
+
+## App configuration
+
+No configuration needed, only if you are accessing the app that is not served by service.
+
+If so, in `/app/src/api/index.ts` file you need to replace the base url:
+
+```ts
+const api = axios.create({
+  baseURL: "<url>",
+});
+```
