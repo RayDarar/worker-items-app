@@ -133,8 +133,6 @@ export default class BaseTable extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import "~vue-context/src/sass/vue-context";
-
 #table {
   width: 100%;
   position: relative;
