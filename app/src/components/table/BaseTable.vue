@@ -11,6 +11,7 @@
         :headers="headers"
         :selection-id="selectedId"
         @click.native="updateSelection(item.id)"
+        @dblclick.native="emitDoubleClick(item.id)"
       ></base-table-row>
     </tbody>
   </table>
@@ -67,6 +68,10 @@ export default class BaseTable extends Vue {
       });
     }
     return this.items;
+  }
+
+  public emitDoubleClick(id: number) {
+    this.$emit("double-click", id);
   }
 }
 </script>
