@@ -4,9 +4,11 @@ import router from "./router";
 
 import BaseButton from "@/components/BaseButton.vue";
 import BaseTable from "@/components/table/BaseTable.vue";
+import AlertBox from "@/components/AlertBox.vue";
 
 Vue.component("base-button", BaseButton);
 Vue.component("base-table", BaseTable);
+Vue.component("alert-box", AlertBox);
 
 Vue.config.productionTip = false;
 
