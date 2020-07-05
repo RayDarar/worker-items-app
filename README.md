@@ -7,6 +7,7 @@ Useful links:
 - [Requirements](assets/requirements.pdf).
 - [API documentation](api.md).
 - [Configuration list](config-list.md)
+- [How to install](install.md)
 
 ## Tools ⚙️
 
@@ -26,7 +27,7 @@ Useful links:
   - [x] Database and queries
   - [x] Backend service
   - [x] Web app
-- [ ] Final test
+- [x] Final test
 
 ## Development process 👷
 
@@ -106,3 +107,7 @@ So, I'm creating a number of generic components:
 After implementing these, creating ui was much simpler.
 
 For api calls I installed axios and abstracted such calls away. Ideally, there would be a service layer (or vuex), but I was running out of time.
+
+### Final test
+
+I started preparations by writing instructions of how to launch the app.

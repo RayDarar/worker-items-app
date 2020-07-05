@@ -22,9 +22,12 @@ import { Prop } from "vue-property-decorator";
 @Component({})
 export default class MainPageNav extends Vue {
   @Prop({ required: true })
-  pages: number;
+  count: number;
   get array() {
-    return Array.from({ length: this.pages }, (_, i) => i + 1);
+    const pagesRaw = Math.ceil(this.count / 10);
+    const pages = pagesRaw < 1 ? 1 : pagesRaw;
+    
+    return Array.from({ length: pages }, (_, i) => i + 1);
   }
 
   selected = 1;
