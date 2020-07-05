@@ -9,6 +9,7 @@
       <div class="wrapper">
         <span class="label">{{ header.label }}</span>
         <img
+          v-if="sortable"
           @click.stop="emitSort(header.key)"
           class="icon"
           src="@/assets/sorting-arrow.png"
@@ -28,6 +29,9 @@ import { TableHeader } from "@/types";
 export default class BaseTableHeaders extends Vue {
   @Prop({ required: true })
   headers: TableHeader[];
+
+  @Prop({ type: Boolean, required: true })
+  sortable: boolean;
 
   public emitSort(key: string) {
     this.$emit("sort", key);

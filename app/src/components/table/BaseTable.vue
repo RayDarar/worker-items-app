@@ -1,7 +1,11 @@
 <template>
   <table id="table">
     <thead>
-      <base-table-headers :headers="headers" @sort="setSortingKey"></base-table-headers>
+      <base-table-headers
+        :sortable="sortable"
+        :headers="headers"
+        @sort="setSortingKey"
+      ></base-table-headers>
     </thead>
     <tbody>
       <base-table-row
@@ -122,6 +126,9 @@ export default class BaseTable extends Vue {
 
   @Prop({ type: Boolean, default: false })
   editable: boolean;
+
+  @Prop({ type: Boolean, default: false })
+  sortable: boolean;
 }
 </script>
 
