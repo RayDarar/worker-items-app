@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "ES2015",
+    "target": "ESNext",
+    "module": "ESNext",
     "strict": true,
     "strictPropertyInitialization": false,
     "importHelpers": true,
@@ -17,9 +17,6 @@
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
-  "include": [
-    "./src/**/*",
-    "./test/**/*",
-  ],
+  "include": ["./src/**/*", "./test/**/*"],
   "exclude": ["node_modules"]
 }
