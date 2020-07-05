@@ -19,3 +19,7 @@ Versions:
 
 1. [Configure](config-list.md) the app if needed
 2. In `/app` directory, run `yarn build`
+
+## 3) Launch
+
+Now you can test that out!
