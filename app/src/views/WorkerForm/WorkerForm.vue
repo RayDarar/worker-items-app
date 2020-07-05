@@ -49,7 +49,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 
-import { workersApi } from "@/api";
+import { workersApi, itemsApi } from "@/api";
 import { TableHeader, ContextItem, Worker, WorkerItem } from "@/types";
 import AlertBox from "@/components/AlertBox.vue";
 import ConfirmBox from "@/components/ConfirmBox.vue";
@@ -124,8 +124,20 @@ export default class WorkerForm extends Vue {
     ) as WorkerItem & { [index: string]: any };
 
     item[payload.key] = payload.value;
-
     if (item.status != "new") item.status = "update";
+  }
+
+  async saveNew() {
+    delete this.worker.id;
+    this.worker.items.forEach((item) => {
+      delete item.id;
+      delete item.status;
+    });
+    const result = await workersApi.createWorker(this.worker);
+    if (result.status == 201) {
+      this.triggerMessage("Успешно");
+      setTimeout(() => this.$router.push("/"), ALERT_TIME);
+    } else this.triggerMessage("Ошибка", true);
   }
 
   async save() {
@@ -133,26 +145,33 @@ export default class WorkerForm extends Vue {
     if (!answer) return;
 
     delete this.worker.status;
-    if (this.isNew) {
-      delete this.worker.id;
-      this.worker.items.forEach((item) => {
-        delete item.id;
-        delete item.status;
-      });
-      const result = await workersApi.createWorker(this.worker);
-      if (result.status == 201) {
-        this.triggerMessage("Успешно");
-        setTimeout(() => this.$router.push("/"), ALERT_TIME);
-      } else this.triggerMessage("Ошибка", true);
-    } else {
-      delete this.worker.items;
-      const result = await workersApi.updateWorker(this.worker);
+    if (this.isNew) this.saveNew();
+    else this.saveOld();
+  }
 
-      if (result.status == 202) {
+  async saveOld() {
+    const result = await workersApi.updateWorker(this.worker);
+
+    if (result.status == 202) {
+      const tasks = [];
+      for (const item of this.worker.items) {
+        if (item.status == "new") {
+          tasks.push(itemsApi.createItem(this.worker.id, item));
+        } else if (item.status == "update") {
+          tasks.push(itemsApi.updateItem(this.worker.id, item));
+        } else if (item.status == "delete") {
+          tasks.push(itemsApi.deleteItem(this.worker.id, item.id));
+        }
+      }
+
+      const taskResult = await Promise.all(tasks);
+      if (taskResult.every((task) => [201, 202].includes(task.status))) {
         this.triggerMessage("Успешно");
-        setTimeout(() => this.$router.push("/"), ALERT_TIME);
-      } else this.triggerMessage("Ошибка", true);
+        return setTimeout(() => this.$router.push("/"), ALERT_TIME);
+      }
     }
+
+    return this.triggerMessage("Ошибка", true);
   }
 
   async cancel() {

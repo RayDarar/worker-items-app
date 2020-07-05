@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { Worker } from "@/types";
+import { Worker, WorkerItem } from "@/types";
 
 const api = axios.create({
   baseURL: "http://localhost:3000/api",
@@ -43,10 +43,12 @@ class WorkerApi {
   }
 
   @Catch()
-  async updateWorker(workerInfo: Worker) {
-    const id = workerInfo.id;
-    delete workerInfo.id;
-    return api.put("/workers/" + id, workerInfo);
+  async updateWorker({ id, firstName, lastName, middleName }: Worker) {
+    return api.put("/workers/" + id, {
+      firstName,
+      lastName,
+      middleName,
+    });
   }
 
   @Catch()
@@ -55,4 +57,28 @@ class WorkerApi {
   }
 }
 
+class ItemsApi {
+  @Catch()
+  async createItem(workerId: number, { name, price }: WorkerItem) {
+    return api.post(`/workers/${workerId}/items/`, {
+      name,
+      price,
+    });
+  }
+
+  @Catch()
+  async updateItem(workerId: number, { id, name, price }: WorkerItem) {
+    return api.put(`/workers/${workerId}/items/${id}`, {
+      name,
+      price,
+    });
+  }
+
+  @Catch()
+  async deleteItem(workerId: number, itemId: number) {
+    return api.delete(`/workers/${workerId}/items/${itemId}`);
+  }
+}
+
 export const workersApi = new WorkerApi();
+export const itemsApi = new ItemsApi();
