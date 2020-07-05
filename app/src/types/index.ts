@@ -2,6 +2,7 @@ export interface TableHeader {
   label: string;
   width: string;
   key: string;
+  type: string;
 }
 
 export interface TableRowItem {

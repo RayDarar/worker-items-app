@@ -10,9 +10,11 @@
         :item="item"
         :headers="headers"
         :selection-id="selectedId"
+        :editable="editable"
         @click.native="updateSelection(item.id)"
         @dblclick.native="emitDoubleClick(item.id)"
         @contextmenu.native.prevent="openContextMenu($event, item.id)"
+        @key-change="$emit('key-change', $event)"
       ></base-table-row>
       <ul
         v-show="context.visible"
@@ -57,9 +59,6 @@ export default class BaseTable extends Vue {
   })
   items: TableRow[];
 
-  @Prop()
-  contextItems: ContextItem[];
-
   selectedId = -1;
   public updateSelection(id: number) {
     this.selectedId = id;
@@ -92,6 +91,8 @@ export default class BaseTable extends Vue {
     this.$emit("double-click", id);
   }
 
+  @Prop()
+  contextItems: ContextItem[];
   context = {
     visible: false,
     x: "0px",
@@ -118,6 +119,9 @@ export default class BaseTable extends Vue {
   beforeDestroy() {
     document.removeEventListener("click", this.closeContextMenu);
   }
+
+  @Prop({ type: Boolean, default: false })
+  editable: boolean;
 }
 </script>
 
