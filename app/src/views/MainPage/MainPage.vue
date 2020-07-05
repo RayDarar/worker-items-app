@@ -2,7 +2,7 @@
   <div id="main-page">
     <div class="wrapper">
       <base-table :items="workers" :headers="headers" sortable></base-table>
-      <main-page-nav :pages="workersCount"></main-page-nav>
+      <main-page-nav @page-change="updatePage" :pages="pagesCount"></main-page-nav>
     </div>
   </div>
 </template>
@@ -22,9 +22,14 @@ import MainPageNav from "./MainPageNav.vue";
 })
 export default class MainPage extends Vue {
   workersCount = 0;
+  currentPage = 1;
   get pagesCount() {
     const pages = this.workersCount / 10;
     return pages < 1 ? 1 : pages;
+  }
+  async updatePage(page: number) {
+    const response = await workersApi.getPage(page);
+    this.workers = response.data;
   }
 
   workers: TableRowItem[] = [];
@@ -52,6 +57,8 @@ export default class MainPage extends Vue {
   async created() {
     const response = await workersApi.getCount();
     this.workersCount = response.data.result;
+
+    await this.updatePage(1);
   }
 }
 </script>

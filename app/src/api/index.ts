@@ -8,4 +8,7 @@ export const workersApi = {
   async getCount() {
     return api.get("/workers/count");
   },
+  async getPage(n: number) {
+    return api.get("/workers/page/" + n);
+  },
 };
