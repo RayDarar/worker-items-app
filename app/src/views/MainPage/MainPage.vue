@@ -1,8 +1,20 @@
 <template>
   <div id="main-page">
     <div class="wrapper">
-      <base-table :items="workers" :headers="headers" sortable></base-table>
-      <main-page-nav @page-change="updatePage" :pages="pagesCount"></main-page-nav>
+      <base-table
+        :items="workers"
+        :headers="headers"
+        sortable
+        @double-click="editWorker"
+      ></base-table>
+      <div class="inner-wrapper">
+        <base-button class="button" @click="addWorker">Добавить</base-button>
+        <main-page-nav
+          class="nav"
+          @page-change="updatePage"
+          :pages="pagesCount"
+        ></main-page-nav>
+      </div>
     </div>
   </div>
 </template>
@@ -30,6 +42,12 @@ export default class MainPage extends Vue {
   async updatePage(page: number) {
     const response = await workersApi.getPage(page);
     this.workers = response.data;
+  }
+  addWorker() {
+    this.$router.push("/form/new");
+  }
+  editWorker(id: number) {
+    this.$router.push("/form/" + id);
   }
 
   workers: TableRowItem[] = [];
@@ -73,5 +91,14 @@ export default class MainPage extends Vue {
 .wrapper {
   width: 60%;
   height: 100%;
+}
+.inner-wrapper {
+  @extend .row-container;
+  align-items: center;
+  justify-content: space-between;
+
+  .button {
+    margin: 1em;
+  }
 }
 </style>

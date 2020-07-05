@@ -39,7 +39,6 @@ export default class MainPageNav extends Vue {
 #navigation {
   @extend .row-container;
   justify-content: center;
-  margin-top: 1em;
 }
 
 .wrapper {
