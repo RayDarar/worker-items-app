@@ -41,6 +41,7 @@
       <base-button class="button" @click="markAddition">Добавить ценность</base-button>
     </div>
     <alert-box class="alert-box" ref="box"></alert-box>
+    <confirm-box ref="confirm"></confirm-box>
   </div>
 </template>
 
@@ -51,6 +52,7 @@ import Component from "vue-class-component";
 import { workersApi } from "@/api";
 import { TableHeader, ContextItem, Worker, WorkerItem } from "@/types";
 import AlertBox from "../../components/AlertBox.vue";
+import ConfirmBox from "@/components/ConfirmBox.vue";
 
 const ALERT_TIME = 1000;
 
@@ -150,8 +152,14 @@ export default class WorkerForm extends Vue {
     }
   }
 
-  cancel() {
-    this.$router.push("/");
+  async cancel() {
+    const answer = await this.question("Вы уверены?");
+    if (answer) this.$router.push("/");
+  }
+
+  async question(text: string): Promise<boolean> {
+    const confirm = this.$refs.confirm as ConfirmBox;
+    return confirm.question(text);
   }
 
   triggerMessage(message: string, error = false) {
