@@ -11,8 +11,8 @@ Versions:
 
 1. _(optionally)_ you can insert data from `/db/default-data.sql`
 2. [Configure](config-list.md) the service properly
-3. In `/service` directory, run `yarn build`
+3. In `/service` directory, run `yarn install` and `yarn build`
 4. After build, run `yarn start:prod`
 5. [Configure](config-list.md) the app if needed
-6. In `/app` directory, run `yarn build`
+6. In `/app` directory, run `yarn install` and `yarn build`
 7. Launch
